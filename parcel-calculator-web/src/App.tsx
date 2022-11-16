@@ -1,13 +1,11 @@
 import React from 'react';
-import { VStack } from '@chakra-ui/react';
-import { Header } from './components';
+import { Header, Main } from './components';
 
 function App() {
   return (
     <div className="App">
-      <VStack>
-        <Header />
-      </VStack>
+      <Header />
+      <Main />
     </div>
   );
 }
