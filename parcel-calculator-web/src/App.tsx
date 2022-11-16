@@ -1,11 +1,13 @@
 import React from 'react';
+import { VStack } from '@chakra-ui/react';
+import { Header } from './components';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>Parcel Calculator</p>
-      </header>
+      <VStack>
+        <Header />
+      </VStack>
     </div>
   );
 }
