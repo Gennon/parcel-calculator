@@ -29,16 +29,17 @@ export const WeightItem: FC<Props> = ({ id, onChange }) => {
       pb="8"
       px={['4', '8', '12']}
       rounded={'md'}
+      bg={'green.200'}
     >
       <FormLabel fontSize={'xl'}>📦 Parcel # {id}</FormLabel>
       <InputGroup>
         <NumberInput
           defaultValue={1}
           min={1}
-          max={10}
+          max={35}
           onChange={handleOnChange}
         >
-          <NumberInputField />
+          <NumberInputField bg={'white'} />
           <NumberInputStepper>
             <NumberIncrementStepper />
             <NumberDecrementStepper />
