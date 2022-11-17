@@ -1,4 +1,12 @@
-import { Tabs, TabList, Tab, TabPanel, TabPanels, Box } from '@chakra-ui/react';
+import {
+  Tabs,
+  TabList,
+  Tab,
+  TabPanel,
+  TabPanels,
+  Box,
+  VStack,
+} from '@chakra-ui/react';
 import { FC } from 'react';
 import { Calculator } from '../Calculator';
 
@@ -20,7 +28,9 @@ export const Main: FC = () => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <Calculator />
+            <VStack>
+              <Calculator />
+            </VStack>
           </TabPanel>
           <TabPanel>
             <p>two!</p>
