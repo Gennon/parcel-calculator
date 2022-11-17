@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { FC } from 'react';
 import { Calculator } from '../Calculator';
+import { PriceList } from '../PriceList';
 
 export const Main: FC = () => {
   return (
@@ -21,7 +22,7 @@ export const Main: FC = () => {
       rounded="md"
       boxShadow="md"
     >
-      <Tabs isFitted variant="enclosed">
+      <Tabs isFitted variant="enclosed-colored">
         <TabList>
           <Tab fontSize={'2xl'}>Calculator</Tab>
           <Tab fontSize={'2xl'}>Price List</Tab>
@@ -33,7 +34,7 @@ export const Main: FC = () => {
             </VStack>
           </TabPanel>
           <TabPanel>
-            <p>two!</p>
+            <PriceList />
           </TabPanel>
         </TabPanels>
       </Tabs>
