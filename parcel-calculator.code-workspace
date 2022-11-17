@@ -1,10 +1,13 @@
 {
   "folders": [
     {
-      "path": "."
+      "path": "parcel-calculator-web"
+    },
+    {
+      "path": "api/node"
     }
   ],
   "settings": {
-    "conventionalCommits.scopes": ["web"]
+    "conventionalCommits.scopes": ["web", "node-api"]
   }
 }
