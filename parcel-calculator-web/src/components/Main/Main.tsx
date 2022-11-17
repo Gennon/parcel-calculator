@@ -1,5 +1,6 @@
 import { Tabs, TabList, Tab, TabPanel, TabPanels, Box } from '@chakra-ui/react';
 import { FC } from 'react';
+import { Calculator } from '../Calculator';
 
 export const Main: FC = () => {
   return (
@@ -19,7 +20,7 @@ export const Main: FC = () => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <p>one!</p>
+            <Calculator />
           </TabPanel>
           <TabPanel>
             <p>two!</p>
