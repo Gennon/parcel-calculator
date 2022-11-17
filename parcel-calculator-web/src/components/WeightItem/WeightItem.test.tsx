@@ -17,12 +17,12 @@ test('Will not have values below 1', () => {
   expect(input).toHaveValue('1');
 });
 
-test('Will not have values above 10', () => {
+test('Will not have values above 35', () => {
   render(<WeightItem id={1} />);
   const input = screen.getByRole('spinbutton');
 
   expect(input).toHaveValue('1');
   fireEvent.change(input, { target: { value: '100' } });
   fireEvent.blur(input);
-  expect(input).toHaveValue('10');
+  expect(input).toHaveValue('35');
 });
