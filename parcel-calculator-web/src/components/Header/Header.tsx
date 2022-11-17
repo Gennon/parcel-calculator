@@ -13,10 +13,10 @@ export const Header: FC = () => {
       px="8"
       w="100%"
     >
-      <Heading fontWeight="extrabold" fontSize="5xl">
+      <Heading fontWeight="extrabold" fontSize={['3xl', '3xl', '5xl']}>
         Parcel Calculator
       </Heading>
-      <Text fontWeight="medium" fontSize="2xl">
+      <Text fontWeight="medium" fontSize={['md', '2xl', '2xl']}>
         Get accurat pricing today
       </Text>
     </Box>
