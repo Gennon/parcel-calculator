@@ -1,0 +1,74 @@
+version: "3.9"
+services:
+  # This service will host the mongodb that is used for development purposes.
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    # Need to share same network as mongo-express
+    networks:
+      - mongo-network
+    ports:
+      - "27017:27017"
+    volumes:
+      - ../db/initdb/:/docker-entrypoint-initdb.d/
+      - ../db/mongodb:/data/db
+    restart: unless-stopped
+
+  # This service will have an admin interface to interact with the database.
+  mongo-express:
+    container_name: mongo-express
+    image: mongo-express
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_BASICAUTH_USERNAME=dev
+      - ME_CONFIG_BASICAUTH_PASSWORD=devPassword
+    # Need to share same network as mongodb
+    networks:
+      - mongo-network
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+
+  # This service run a Mock server in port 5555 using the schema.json file generated 
+  # in the previous step.
+  node-api:
+    container_name: node-api
+    build:
+      context: ../api/node
+      dockerfile: Dockerfile.dev
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+      DATABASE_URI: mongodb://mongodb:27017/parcel-calculator
+    ports:
+      - 5555:5555
+    volumes:
+      - ../api/node:/code
+    networks:
+      - mongo-network
+    depends_on:
+      - mongodb
+  
+  # This service runs a React Web app in development mode
+  # The container is buildt using the Dockerfile.dev file and it supports hot reloading.
+  # The app is available at https://localhost:3000
+  web:
+    container_name: parcel-calculator-web
+    build:
+      context: ../parcel-calculator-web
+      dockerfile: Dockerfile.dev
+    environment:
+      CHOKIDAR_USEPOLLING: "true"
+    volumes:
+      - ../parcel-calculator-web:/code
+    ports:
+      - "3000:3000"
+    # This service can't start if api didn't finish.
+    depends_on:
+      - node-api
+  
+networks:
+  mongo-network:
+    driver: bridge
