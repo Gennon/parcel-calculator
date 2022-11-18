@@ -5,6 +5,12 @@
     },
     {
       "path": "api/node"
+    },
+    {
+      "path": "infra"
+    },
+    {
+      "path": "db"
     }
   ],
   "settings": {
