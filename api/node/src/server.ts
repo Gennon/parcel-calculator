@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
+import Configuration from "./models/Configuration";
 
 
 const server = express();
@@ -11,7 +12,12 @@ server.use(bodyParser.json());
 server.use(cors({ origin: true }));
 
 server.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send("Hello World!!");
+});
+
+server.get("/conf", async (req, res) => {
+  const conf = await Configuration.findOne({}).exec();
+  res.send(conf);
 });
 
 
