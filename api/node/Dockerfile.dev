@@ -9,17 +9,17 @@ RUN locale-gen en_US.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
+ENV NODE_ENV=development
 
 WORKDIR /code
 
 EXPOSE 5555
 
-COPY package.json /code
+COPY package.json .
+COPY package-lock.json .
 
-RUN npm config set loglevel warn
+RUN npm install
 
-RUN npm install --silent
-
-COPY * /code
+COPY . .
 
 CMD ["npm", "run", "start"]

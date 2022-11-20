@@ -1,4 +1,4 @@
-version: "3.9"
+version: '3.9'
 services:
   # This service will host the mongodb that is used for development purposes.
   mongodb:
@@ -8,7 +8,7 @@ services:
     networks:
       - mongo-network
     ports:
-      - "27017:27017"
+      - '27017:27017'
     volumes:
       - ../db/initdb/:/docker-entrypoint-initdb.d/
       - ../db/mongodb:/data/db
@@ -27,12 +27,12 @@ services:
     networks:
       - mongo-network
     ports:
-      - "8081:8081"
+      - '8081:8081'
     depends_on:
       - mongodb
     restart: unless-stopped
 
-  # This service run a Mock server in port 5555 using the schema.json file generated 
+  # This service run a Mock server in port 5555 using the schema.json file generated
   # in the previous step.
   node-api:
     container_name: node-api
@@ -40,17 +40,18 @@ services:
       context: ../api/node
       dockerfile: Dockerfile.dev
     environment:
-      CHOKIDAR_USEPOLLING: "true"
+      CHOKIDAR_USEPOLLING: 'true'
       DATABASE_URI: mongodb://mongodb:27017/parcel-calculator
     ports:
       - 5555:5555
     volumes:
       - ../api/node:/code
+      - /code/node_modules
     networks:
       - mongo-network
     depends_on:
       - mongodb
-  
+
   # This service runs a React Web app in development mode
   # The container is buildt using the Dockerfile.dev file and it supports hot reloading.
   # The app is available at https://localhost:3000
@@ -60,15 +61,16 @@ services:
       context: ../parcel-calculator-web
       dockerfile: Dockerfile.dev
     environment:
-      CHOKIDAR_USEPOLLING: "true"
+      CHOKIDAR_USEPOLLING: 'true'
     volumes:
       - ../parcel-calculator-web:/code
+      - /code/node_modules
     ports:
-      - "3000:3000"
+      - '3000:3000'
     # This service can't start if api didn't finish.
     depends_on:
       - node-api
-  
+
 networks:
   mongo-network:
     driver: bridge

@@ -14,6 +14,6 @@
     }
   ],
   "settings": {
-    "conventionalCommits.scopes": ["web", "node-api"]
+    "conventionalCommits.scopes": ["web", "node-api", "infra"]
   }
 }
