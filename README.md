@@ -28,7 +28,11 @@ cd infra
 docker-compose up
 ```
 
+This can take a while the first time you run it.
+
 Now you can access the frontend at [http://localhost:3000](http://localhost:3000).
+
+The API documentation is available at [http://localhost:5555/api-docs/v3](http://localhost:5555/api-docs/v3).
 
 The database is available at [http://localhost:8081](http://localhost:8081)
 
