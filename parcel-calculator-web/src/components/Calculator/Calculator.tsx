@@ -11,11 +11,29 @@ import {
   Wrap,
   WrapItem,
 } from '@chakra-ui/react';
-import { FC, useState } from 'react';
+import { FC, useState, useEffect } from 'react';
+
 import { WeightItem } from '../WeightItem';
+import { getConfiguration } from '../../api/configuration';
 
 export const Calculator: FC = () => {
   const [parcels, setParcels] = useState([{ id: 1, weight: 1 }]);
+  const [ config, setConfig ] = useState({
+    baseCost: 1,
+    costPerKg: 1,
+    costPerParcel: 1,
+  });
+
+  // This is a hook that will run when the component is mounted
+  // get the configuration from the API and set it in state
+  useEffect(() => {
+    getConfiguration().then((config) => {
+      if(config) {
+        setConfig(config.data);
+      }
+    });
+  }, []);
+
 
   const handleNumberOfParcelsChange = (_: string, value: number) => {
     let newParcels = [];
@@ -39,12 +57,13 @@ export const Calculator: FC = () => {
   // We will also add 10 to amount for the total calculation
   const calculatePriceLocal = () => {
     return parcels.reduce((total, parcel) => {
-      return total + 50 + (parcel.weight - 1) * 5;
-    }, 10);
+
+      return total + config.costPerParcel + (parcel.weight - 1) * config.costPerKg;
+    }, config.baseCost);
   };
 
   return (
-    <Box as="section" maxW={'800px'} minW={['100%', '800px']}>
+    <Box as="section" maxW={'800px'} minW={['100%', '800px']} data-testid="Calculator">
       <FormControl id="parcels">
         <FormLabel fontSize={'2xl'}>The number of packages</FormLabel>
         <NumberInput
