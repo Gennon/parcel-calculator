@@ -404,6 +404,11 @@ exports[`has correct structure 1`] = `
           <th
             class="css-0"
           >
+            kg
+          </th>
+          <th
+            class="css-0"
+          >
             #1
           </th>
           <th
