@@ -1,10 +1,13 @@
 import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
+import expressOasGenerator from "express-oas-generator";
 import Configuration from "./models/Configuration";
 
 
+
 const server = express();
+expressOasGenerator.init(server, {});
 
 // Body Parser middleware
 server.use(bodyParser.json());
