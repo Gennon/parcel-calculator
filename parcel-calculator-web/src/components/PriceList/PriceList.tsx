@@ -51,6 +51,7 @@ export const PriceList: FC = () => {
         </Tbody>
         <Tfoot>
           <Tr>
+            <Th>kg</Th>
             {headers.map(header => (
               <Th key={header}>#{header}</Th>
             ))}
