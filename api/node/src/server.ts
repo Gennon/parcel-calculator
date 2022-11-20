@@ -15,7 +15,7 @@ server.get("/", (req, res) => {
   res.send("Hello World!!");
 });
 
-server.get("/conf", async (req, res) => {
+server.get("/configuration", async (req, res) => {
   const conf = await Configuration.findOne({}).exec();
   res.send(conf);
 });

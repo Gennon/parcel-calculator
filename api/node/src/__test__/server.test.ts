@@ -7,14 +7,14 @@ describe('GET /', () => {
   });
 });
 
-describe('GET /conf', () => {
+describe('GET /configuration', () => {
   it('should return 200 OK', () => {
-    return request(server).get('/conf').expect(200);
+    return request(server).get('/configuration').expect(200);
   });
 
   it('should return a configuration object', () => {
     return request(server)
-      .get('/conf')
+      .get('/configuration')
       .expect(200)
       .then(response => {
         expect(response.body).toHaveProperty('baseCost');
